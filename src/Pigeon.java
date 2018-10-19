@@ -24,6 +24,9 @@ public class Pigeon {
 		this.vitesse = vitesse;
 	}
 	
-	
+	public static void BoucleInfinie()
+	{
+		
+	}
 	
 }
