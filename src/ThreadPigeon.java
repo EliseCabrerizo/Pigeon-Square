@@ -40,7 +40,7 @@ public class ThreadPigeon extends Thread {
 		public void run() {
 			super.run();
 			while (true) {
-				Pigeon.BoucleInfinie();
+				Pigeon.game();
 			}
 		}
 

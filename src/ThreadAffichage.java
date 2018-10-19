@@ -1,3 +1,5 @@
+import java.awt.MouseInfo;
+import java.awt.event.MouseListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -47,8 +49,9 @@ public class ThreadAffichage extends Thread {
 		mainFrame.getContentPane().add(c);
 		mainFrame.pack();
 		mainFrame.setVisible(true);
-
+		//mainFrame.addMouseListener(new Affichage());
 		while (true) {
+			
 			c.paintComponent(c.getGraphics());
 			try {
 				Thread.sleep(100);
