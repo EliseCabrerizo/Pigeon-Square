@@ -1,4 +1,3 @@
-
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -10,6 +9,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
+@SuppressWarnings("serial")
 public class Parc extends JComponent{
 
 	public static Pigeon[] pigeons;
@@ -26,19 +26,19 @@ public class Parc extends JComponent{
 		    } 
 		
 				
-					for(int i=0;i<pigeons.length;i++)
-					{
-						try {
-						if (pigeons[i].getPosX()!=-1 &&pigeons[i].getPosY()!=-1)
-						{
-							Image img = ImageIO.read(new File("res/dove.jpg"));
-							g.drawImage(img,pigeons[i].getPosX(),pigeons[i].getPosY(),null);
-						}
-					} catch (IOException ex) {
-						Logger.getLogger(Parc.class.getName()).log(Level.SEVERE, null, ex);
-					}
-					}
-					if(food!=null)
+		for(int i=0;i<pigeons.length;i++){
+			try {
+				if (pigeons[i].getPosX()!=-1 &&pigeons[i].getPosY()!=-1){
+					Image img = ImageIO.read(new File("res/dove.jpg"));
+					g.drawImage(img,pigeons[i].getPosX(),pigeons[i].getPosY(),null);
+				}
+			} catch (IOException ex) {
+					Logger.getLogger(Parc.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		}
+					
+		
+		/*if(food!=null)
 					{
 					for(int i=0;i<food.size();i++)
 					{
@@ -57,7 +57,7 @@ public class Parc extends JComponent{
 						Logger.getLogger(Parc.class.getName()).log(Level.SEVERE, null, ex);
 					}
 					}
-					}
+					}*/
 			
 			}
 

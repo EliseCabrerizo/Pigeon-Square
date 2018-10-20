@@ -1,7 +1,8 @@
-import java.awt.MouseInfo;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.JFrame;
 
 
@@ -45,11 +46,43 @@ public class ThreadAffichage extends Thread {
 		super.run();
 		
 		JFrame mainFrame = new JFrame("POOA - PigeonSquare");
+		mainFrame.setSize(600, 600);
 		Parc c = new Parc();
 		mainFrame.getContentPane().add(c);
 		mainFrame.pack();
+		
 		mainFrame.setVisible(true);
 		//mainFrame.addMouseListener(new Affichage());
+		mainFrame.addMouseListener(new MouseListener() { 
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.printf("drag : x=%3d, y=%3d\n",e.getX(),e.getY());	
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		while (true) {
 			
 			c.paintComponent(c.getGraphics());
