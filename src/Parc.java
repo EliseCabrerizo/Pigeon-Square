@@ -18,26 +18,31 @@ import javax.swing.JComponent;
 	public void paintComponent(Graphics g) {
 
 		super.paintComponent(g);
+		
+		//Background-----------
 		try {
 		      Image img = ImageIO.read(new File("res/background.jpg"));
 		      g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 		    } catch (IOException e) {
 		      e.printStackTrace();
 		    } 
+		//Background-----------
 		
-				
+		
+		//Pigeon-----------		
 		for(int i=0;i<pigeons.length;i++){
 			try {
 				if (pigeons[i].getPosX()!=-1 &&pigeons[i].getPosY()!=-1){
-					Image img = ImageIO.read(new File("res/dove.jpg"));
-					g.drawImage(img,pigeons[i].getPosX(),pigeons[i].getPosY(),null);
+					Image img = ImageIO.read(new File("res/dove.png"));
+					g.drawImage(img,pigeons[i].getPosX(),pigeons[i].getPosY(),60,60,null);
 				}
 			} catch (IOException ex) {
 					Logger.getLogger(Parc.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}
-					
+		//Pigeon-----------	
 		
+		//Food-----------
 		if(food!=null){
 			
 			for(int i=0;i<food.size();i++){
@@ -50,22 +55,24 @@ import javax.swing.JComponent;
 						g.drawImage(img,x,y,null);
 					}else{
 						Image img = ImageIO.read(new File("res/rottenfood.png"));
-						g.drawImage(img,food.get(i).getPosX(),food.get(i).getPosY(),null);
+						int x= food.get(i).getPosX() - img.getWidth(null)/2;
+						int y= food.get(i).getPosY() - img.getHeight(null);
+						g.drawImage(img,x,y,null);
 					}
 				} catch (IOException ex) {
 					Logger.getLogger(Parc.class.getName()).log(Level.SEVERE, null, ex);
 				}
 			}
 		}
-			
+		//Food-----------	
 	}
 
 
 	public static void main(String args[]) {
 		
-		Pigeon pigeon1=new Pigeon(50,50);
+		Pigeon pigeon1=new Pigeon(150,150);
 		Pigeon pigeon2=new Pigeon(0,0);
-		Pigeon pigeon3=new Pigeon(100,150);
+		Pigeon pigeon3=new Pigeon(300,300);
 		Parc.pigeons = new Pigeon[]{pigeon1,pigeon2,pigeon3};
 		Parc.food = new ArrayList<>();
 		ThreadAffichage threadAffichage=new ThreadAffichage();
@@ -85,6 +92,7 @@ import javax.swing.JComponent;
 		Food food = new Food(x,y);
 		getFood().add(food);
 	}
+
 
 
 	public static Pigeon[] getPigeons() {

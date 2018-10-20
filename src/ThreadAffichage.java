@@ -45,20 +45,35 @@ public class ThreadAffichage extends Thread {
 	public void run() {
 		super.run();
 		
+		Parc c = new Parc();
+		createWindow(c);
+		
+		while (true) {
+			c.repaint();
+			
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException ex) {
+				Logger.getLogger(Parc.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		}
+
+
+	}
+	
+	public void createWindow(Parc c){
 		JFrame mainFrame = new JFrame("POOA - PigeonSquare");
 		mainFrame.setSize(600, 600);
-		Parc c = new Parc();
+
 		mainFrame.getContentPane().add(c);
 		mainFrame.pack();
 		
 		mainFrame.setVisible(true);
 		
 		mainFrame.addMouseListener(new MouseListener() { 
-			@SuppressWarnings("static-access")
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				c.createFood(e.getX(), e.getY());
-				System.out.println(c.food);	
 			}
 
 			@Override
@@ -85,17 +100,8 @@ public class ThreadAffichage extends Thread {
 				
 			}
 		});
-		
-		
-		while (true) {
-			c.paintComponent(c.getGraphics());
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException ex) {
-				Logger.getLogger(Parc.class.getName()).log(Level.SEVERE, null, ex);
-			}
-		}
 	}
+	
 }
 	
 	

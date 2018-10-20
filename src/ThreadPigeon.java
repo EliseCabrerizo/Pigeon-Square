@@ -1,8 +1,6 @@
 
 public class ThreadPigeon extends Thread {
 
-	
-
 		public ThreadPigeon() {
 		}
 
