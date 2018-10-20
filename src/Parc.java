@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
 @SuppressWarnings("serial")
-public class Parc extends JComponent{
+	public class Parc extends JComponent{
 
 	public static Pigeon[] pigeons;
 	public static ArrayList<Food> food;
@@ -38,28 +38,27 @@ public class Parc extends JComponent{
 		}
 					
 		
-		/*if(food!=null)
-					{
-					for(int i=0;i<food.size();i++)
-					{
-						try {
-						if (food.get(i).isFresh())
-						{
-							Image img = ImageIO.read(new File("res/freshfood.jpg"));
-							g.drawImage(img,food.get(i).getPosX(),food.get(i).getPosY(),null);
-						}
-						else 
-						{
-							Image img = ImageIO.read(new File("res/rottenfood.jpg"));
-							g.drawImage(img,food.get(i).getPosX(),food.get(i).getPosY(),null);
-						}
-					} catch (IOException ex) {
-						Logger.getLogger(Parc.class.getName()).log(Level.SEVERE, null, ex);
-					}
-					}
-					}*/
+		if(food!=null){
 			
+			for(int i=0;i<food.size();i++){
+				
+				try {
+					if (food.get(i).isFresh()){	
+						Image img = ImageIO.read(new File("res/freshfood.png"));
+						int x= food.get(i).getPosX() - img.getWidth(null)/2;
+						int y= food.get(i).getPosY() - img.getHeight(null);
+						g.drawImage(img,x,y,null);
+					}else{
+						Image img = ImageIO.read(new File("res/rottenfood.png"));
+						g.drawImage(img,food.get(i).getPosX(),food.get(i).getPosY(),null);
+					}
+				} catch (IOException ex) {
+					Logger.getLogger(Parc.class.getName()).log(Level.SEVERE, null, ex);
+				}
 			}
+		}
+			
+	}
 
 
 	public static void main(String args[]) {
@@ -68,6 +67,7 @@ public class Parc extends JComponent{
 		Pigeon pigeon2=new Pigeon(0,0);
 		Pigeon pigeon3=new Pigeon(100,150);
 		Parc.pigeons = new Pigeon[]{pigeon1,pigeon2,pigeon3};
+		Parc.food = new ArrayList<>();
 		ThreadAffichage threadAffichage=new ThreadAffichage();
 		ThreadPigeon threadPigeon1 = new ThreadPigeon();
 		ThreadPigeon threadPigeon2 = new ThreadPigeon();
@@ -79,6 +79,34 @@ public class Parc extends JComponent{
 		threadPigeon3.start();
 		
 		}
+	
+	
+	public void createFood(int x, int y){
+		Food food = new Food(x,y);
+		getFood().add(food);
+	}
+
+
+	public static Pigeon[] getPigeons() {
+		return pigeons;
+	}
+
+
+	public static void setPigeons(Pigeon[] pigeons) {
+		Parc.pigeons = pigeons;
+	}
+
+
+	public static ArrayList<Food> getFood() {
+		return food;
+	}
+
+
+	public static void setFood(ArrayList<Food> food) {
+		Parc.food = food;
+	}
+	
+	
 	
 }
 		

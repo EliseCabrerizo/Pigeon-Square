@@ -52,11 +52,13 @@ public class ThreadAffichage extends Thread {
 		mainFrame.pack();
 		
 		mainFrame.setVisible(true);
-		//mainFrame.addMouseListener(new Affichage());
+		
 		mainFrame.addMouseListener(new MouseListener() { 
+			@SuppressWarnings("static-access")
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.printf("drag : x=%3d, y=%3d\n",e.getX(),e.getY());	
+				c.createFood(e.getX(), e.getY());
+				System.out.println(c.food);	
 			}
 
 			@Override
@@ -83,8 +85,9 @@ public class ThreadAffichage extends Thread {
 				
 			}
 		});
+		
+		
 		while (true) {
-			
 			c.paintComponent(c.getGraphics());
 			try {
 				Thread.sleep(100);
@@ -93,5 +96,6 @@ public class ThreadAffichage extends Thread {
 			}
 		}
 	}
-
 }
+	
+	
