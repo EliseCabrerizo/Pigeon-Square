@@ -56,16 +56,16 @@ import javax.swing.JComponent;
 		super.paintComponent(g);
 		//Background-----------
 
-		try 
-		{
-			Image img = ImageIO.read(new File("res/background.jpg"));
-		    g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
+		//try 
+		//{
+			//Image img = ImageIO.read(new File("res/background.jpg"));
+		  //  g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+		//} 
+		//catch (IOException e) 
+		//{
+		//	e.printStackTrace();
 
-		} 
+		//} 
 
 		//Background-----------
 
@@ -77,7 +77,7 @@ import javax.swing.JComponent;
 			try 
 			{
 				img = ImageIO.read(new File("res/dove.png"));
-				g.drawImage(img,pigeons[i].getPosX(),pigeons[i].getPosY(),60,60,null);
+				g.drawImage(img,pigeons[i].getPosX()-(img.getWidth(null)/2),pigeons[i].getPosY()-(img.getHeight(null)/2),60,60,null);
 			} 
 			catch (IOException e) 
 			{
@@ -102,7 +102,7 @@ import javax.swing.JComponent;
 					{	
 						Image img = ImageIO.read(new File("res/freshfood.png"));
 						int x= food.get(i).getPosX() - img.getWidth(null)/2;
-						int y= food.get(i).getPosY() - img.getHeight(null);
+						int y= food.get(i).getPosY() - img.getHeight(null)/2;
 						g.drawImage(img,x,y,null);
 
 					}
@@ -110,7 +110,7 @@ import javax.swing.JComponent;
 					{
 						Image img = ImageIO.read(new File("res/rottenfood.png"));
 						int x= food.get(i).getPosX() - img.getWidth(null)/2;
-						int y= food.get(i).getPosY() - img.getHeight(null);
+						int y= food.get(i).getPosY() - img.getHeight(null)/2;
 						g.drawImage(img,x,y,null);
 
 					}
