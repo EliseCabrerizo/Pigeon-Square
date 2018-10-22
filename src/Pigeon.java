@@ -36,25 +36,54 @@ public class Pigeon extends Thread {
 		this.numberPigeon=i;
 	}
 
-	public void move(Food food){
-		int vitesse =2;
-
-		if(food.isFresh())
+	public void move(Food food)
+	{
+		if(food.isFresh()&&food.exist())
 		{
 			if(posX < food.getPosX())
-				
-					posX +=vitesse;
+				for(int i=posX;i<food.getPosX()&&food.exist();i++)
+					{
+					posX ++;
+					try {
+						Thread.sleep(4);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					}
 			else if(posX > food.getPosX())
-				
-					posX -=vitesse;
+				for(int i=posX;i>food.getPosX()&&food.exist();i--)
+					{
+					posX --;
+					try {
+						Thread.sleep(4);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					}
 			
 
 			if(posY < food.getPosY())
-				
-					posY+=vitesse;
+				for(int i=posY;i<food.getPosY()&&food.exist();i++)
+					{
+					posY++;
+					try {
+						Thread.sleep(4);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}}
 			else if(posY > food.getPosY())
-				
-					posY-=vitesse;
+				for(int i=posY;i>food.getPosY()&&food.exist();i--)
+					{
+					posY--;
+					try {
+						Thread.sleep(4);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}}
 		}
 		
 	}
@@ -84,19 +113,20 @@ public class Pigeon extends Thread {
 	
 	public void eat(Food food)
 	{
-		if(posX==food.getPosX()&&posY==food.getPosY())
-			if(food.isFresh())
-			{
-				food.isEaten();
-				System.out.println("Nourriture mangée par le pigeon "+numberPigeon);
-			}
+		synchronized(this)
+		{
+			if(posX==food.getPosX()&&posY==food.getPosY())
+				if(food.isFresh()&&food.exist())
+					food.isEaten(numberPigeon);
+		}
+		
 	}
 	
 	public void afraid()
 	{
 		Random rand= new Random();
 		int intervalOccurence=rand.nextInt(Parc.windowSize);
-		int randomNumber = rand.nextInt(Parc.windowSize*200);
+		int randomNumber = rand.nextInt(Parc.windowSize*20);
 		
 		
 		if(randomNumber<intervalOccurence)
@@ -126,14 +156,15 @@ public class Pigeon extends Thread {
 		
 	}
 
-	@Override
 	public void run()
 	{
 		while(true)
 		{
+
 			game();
-			try {
-				Thread.sleep(50);
+			try 
+			{
+				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

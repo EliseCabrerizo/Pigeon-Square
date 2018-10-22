@@ -64,7 +64,6 @@ import javax.swing.JComponent;
 		catch (IOException e) 
 		{
 			e.printStackTrace();
-
 		} 
 
 		//Background-----------
@@ -104,7 +103,6 @@ import javax.swing.JComponent;
 						int x= food.get(i).getPosX() - img.getWidth(null)/2;
 						int y= food.get(i).getPosY() - img.getHeight(null)/2;
 						g.drawImage(img,x,y,null);
-
 					}
 					else if(!food.get(i).isFresh()&&food.get(i).exist())
 					{
@@ -112,7 +110,6 @@ import javax.swing.JComponent;
 						int x= food.get(i).getPosX() - img.getWidth(null)/2;
 						int y= food.get(i).getPosY() - img.getHeight(null)/2;
 						g.drawImage(img,x,y,null);
-
 					}
 				}
 				catch (IOException ex) 
@@ -128,7 +125,6 @@ import javax.swing.JComponent;
 
 	public static void main(String args[]) 
 	{
-
 		Parc.food = new ArrayList<>();
 		
 		Pigeon pigeon1=new Pigeon(1);
@@ -142,7 +138,6 @@ import javax.swing.JComponent;
 		pigeon2.start();
 		pigeon3.start();
 		threadAffichage.start();
-
 	}
 	
 	
