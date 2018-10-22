@@ -1,4 +1,7 @@
 # PigeonSquare
-Exercice 2 POOA 
 
-Elise Cabrerizo, Fadoua Hamouachy, Sandrine Yven
+Travail N°2
+
+CABRERIZO Elise, HAMOUACHY Fadoua, YVEN Sandrine
+
+
