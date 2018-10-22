@@ -96,7 +96,7 @@ public class ThreadAffichage extends Thread {
 
 		JFrame mainFrame = new JFrame("POOA - PigeonSquare");
 		mainFrame.getContentPane().add(c);
-		mainFrame.setSize(750, 750);
+		mainFrame.setSize(Parc.windowSize, Parc.windowSize);
 		mainFrame.setResizable(false);
 		mainFrame.setVisible(true);
 

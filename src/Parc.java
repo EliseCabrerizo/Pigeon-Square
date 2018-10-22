@@ -24,7 +24,7 @@ import javax.swing.JComponent;
 	public class Parc extends JComponent{
 
 
-
+	public static int windowSize=750;
 	public static Pigeon[] pigeons;
 
 	public static ArrayList<Food> food;
@@ -52,13 +52,7 @@ import javax.swing.JComponent;
 
 
 	public void paintComponent(Graphics g) {
-
-
-
 		super.paintComponent(g);
-
-		
-
 		//Background-----------
 
 		try {
@@ -81,24 +75,14 @@ import javax.swing.JComponent;
 
 		//Pigeon-----------		
 
-		for(int i=0;i<pigeons.length;i++){
-
+		for(int i=0;i<pigeons.length;i++)
+		{
 			try {
-
-				if (pigeons[i].getPosX()!=-1 &&pigeons[i].getPosY()!=-1){
-
-					Image img = ImageIO.read(new File("res/dove.png"));
-
-					g.drawImage(img,pigeons[i].getPosX(),pigeons[i].getPosY(),60,60,null);
-
-				}
-
-			} catch (IOException ex) {
-
-					Logger.getLogger(Parc.class.getName()).log(Level.SEVERE, null, ex);
-
+				pigeons[i].paintComponent(g);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-
 		}
 
 		//Pigeon-----------	
@@ -108,13 +92,7 @@ import javax.swing.JComponent;
 		//Food-----------
 
 		if(food!=null){
-
-			
-
 			for(int i=0;i<food.size();i++){
-
-				
-
 				try {
 
 					if (food.get(i).isFresh()&&food.get(i).exist()){	
@@ -162,33 +140,29 @@ import javax.swing.JComponent;
 	public static void main(String args[]) {
 
 		
-		Pigeon pigeon1=new Pigeon();
+		
+		
+		Pigeon pigeon1=new Pigeon(0,0);
 
-		Pigeon pigeon2=new Pigeon();
+		Pigeon pigeon2=new Pigeon(500,500);
 
-		Pigeon pigeon3=new Pigeon();
+		Pigeon pigeon3=new Pigeon(300,400);
 
 		Parc.pigeons = new Pigeon[]{pigeon1,pigeon2,pigeon3};
-
-		Parc.food = new ArrayList<>();
-
+		
+		
+		
 		ThreadAffichage threadAffichage=new ThreadAffichage();
-
-		ThreadPigeon threadPigeon1 = new ThreadPigeon();
-
-		ThreadPigeon threadPigeon2 = new ThreadPigeon();
-
-		ThreadPigeon threadPigeon3 = new ThreadPigeon();
-
-
-
+		Parc.food = new ArrayList<>();
+		
+		pigeon1.start();
+		pigeon2.start();
+		pigeon3.start();
 		threadAffichage.start();
 
-		threadPigeon1.start();
+		
 
-		threadPigeon2.start();
-
-		threadPigeon3.start();
+		
 
 		
 

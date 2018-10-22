@@ -1,6 +1,12 @@
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
-public class Pigeon {
+import javax.imageio.ImageIO;
+
+public class Pigeon extends Thread {
 
 
 
@@ -15,39 +21,37 @@ public class Pigeon {
 		return posX;
 
 	}
-
 	public void setPosX(int posX) {
 
 		Pigeon.posX = posX;
-
 	}
-
 	public int getPosY() {
 
 		return posY;
 
 	}
-
 	public void setPosY(int posY) {
 
 		Pigeon.posY = posY;
 
 	}
-
 	
 
-	public Pigeon()
-
+	public Pigeon(int x, int y)
 	{
+		super();
 		Random rand = new Random();
-		Pigeon.posX=rand.nextInt(Parc.WIDTH);
-		Pigeon.posY=rand.nextInt(Parc.HEIGHT);
-
-		
+		//posX=rand.nextInt(Parc.windowSize);
+		//posY=rand.nextInt(Parc.windowSize);
+		posX=x;
+		posY=y;
 
 	}
 
-	
+	public void paintComponent(Graphics g) throws IOException{
+		Image img = ImageIO.read(new File("res/dove.png"));
+		g.drawImage(img,posX,posY,60,60,null);
+    }
 
 	public static void move(Food food){
 
@@ -98,19 +102,30 @@ public class Pigeon {
 	{
 		if(posX==food.getPosX()&&posY==food.getPosY())
 			if(food.isFresh())
+			{
 				food.isEaten();
+				System.out.println("Nourriture mangée");
+			}
 	}
 	
 	public static void afraid()
 	{
 		Random rand= new Random();
-		int intervalOccurence=rand.nextInt(600);
-		int randomNumber = rand.nextInt(600);
+		int intervalOccurence=rand.nextInt(Parc.windowSize);
+		int randomNumber = rand.nextInt(Parc.windowSize*20);
+		
 		
 		if(randomNumber<intervalOccurence)
 		{
-			posX=rand.nextInt(Parc.WIDTH);
-			posY=rand.nextInt(Parc.WIDTH);
+			posX=rand.nextInt(Parc.windowSize);
+			posY=rand.nextInt(Parc.windowSize);
+			System.out.println("Effrayé");
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	public static void game()
@@ -128,12 +143,25 @@ public class Pigeon {
 				e.printStackTrace();
 			}
 			eat(temp);
-			
 		}
+		afraid();
 		
-
 	}
 
-	
+	@Override
+	public void run()
+	{
+		while(true)
+		{
+			game();
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
 
 }
