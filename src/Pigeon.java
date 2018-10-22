@@ -37,23 +37,24 @@ public class Pigeon extends Thread {
 	}
 
 	public void move(Food food){
+		int vitesse =2;
 
 		if(food.isFresh())
 		{
 			if(posX < food.getPosX())
-				for(int i=posX;i<food.getPosX();i++)
-					posX ++;
+				
+					posX +=vitesse;
 			else if(posX > food.getPosX())
-				for(int i=posX;i>food.getPosX();i--)
-					posX --;
+				
+					posX -=vitesse;
 			
 
 			if(posY < food.getPosY())
-				for(int i=posY;i<food.getPosY();i++)
-					posY++;
+				
+					posY+=vitesse;
 			else if(posY > food.getPosY())
-				for(int i=posY;i>food.getPosY();i--)
-					posY--;
+				
+					posY-=vitesse;
 		}
 		
 	}
@@ -95,7 +96,7 @@ public class Pigeon extends Thread {
 	{
 		Random rand= new Random();
 		int intervalOccurence=rand.nextInt(Parc.windowSize);
-		int randomNumber = rand.nextInt(Parc.windowSize*20);
+		int randomNumber = rand.nextInt(Parc.windowSize*200);
 		
 		
 		if(randomNumber<intervalOccurence)
@@ -119,12 +120,6 @@ public class Pigeon extends Thread {
 			
 			Food temp = findFood();
 			move(temp);
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			eat(temp);
 		}
 		afraid();
@@ -138,7 +133,7 @@ public class Pigeon extends Thread {
 		{
 			game();
 			try {
-				Thread.sleep(200);
+				Thread.sleep(50);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -56,16 +56,16 @@ import javax.swing.JComponent;
 		super.paintComponent(g);
 		//Background-----------
 
-		//try 
-		//{
-			//Image img = ImageIO.read(new File("res/background.jpg"));
-		  //  g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
-		//} 
-		//catch (IOException e) 
-		//{
-		//	e.printStackTrace();
+		try 
+		{
+			Image img = ImageIO.read(new File("res/background.jpg"));
+		    g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
 
-		//} 
+		} 
 
 		//Background-----------
 
