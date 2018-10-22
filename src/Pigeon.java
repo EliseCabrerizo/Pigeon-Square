@@ -1,59 +1,42 @@
-import java.awt.Graphics;
-import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
 import java.util.Random;
-
-import javax.imageio.ImageIO;
 
 public class Pigeon extends Thread {
 
-
-
-	private static int posX=-1;
-
-	private static int posY=-1;
-
+	private int posX=-1;
+	private int posY=-1;
+	private int numberPigeon;
 	
-
 	public int getPosX() {
 
 		return posX;
 
 	}
-	public void setPosX(int posX) {
+	public void setPosX(int X) {
 
-		Pigeon.posX = posX;
+		this.posX = X;
 	}
 	public int getPosY() {
 
 		return posY;
 
 	}
-	public void setPosY(int posY) {
+	public void setPosY(int Y) {
 
-		Pigeon.posY = posY;
+		this.posY = Y;
 
 	}
 	
 
-	public Pigeon(int x, int y)
+	public Pigeon(int i)
 	{
 		super();
 		Random rand = new Random();
-		//posX=rand.nextInt(Parc.windowSize);
-		//posY=rand.nextInt(Parc.windowSize);
-		posX=x;
-		posY=y;
-
+		this.posX=rand.nextInt(Parc.windowSize);
+		this.posY=rand.nextInt(Parc.windowSize);
+		this.numberPigeon=i;
 	}
 
-	public void paintComponent(Graphics g) throws IOException{
-		Image img = ImageIO.read(new File("res/dove.png"));
-		g.drawImage(img,posX,posY,60,60,null);
-    }
-
-	public static void move(Food food){
+	public void move(Food food){
 
 		if(food.isFresh())
 		{
@@ -76,7 +59,7 @@ public class Pigeon extends Thread {
 	}
 
 
-	public static Food findFood()
+	public Food findFood()
 	{
 		Food temp=new Food();
 		int distanceMin = 10000000;
@@ -93,22 +76,22 @@ public class Pigeon extends Thread {
 			return temp;
 	}
 
-	public static int distance(int cibleX,int cibleY)
+	public int distance(int cibleX,int cibleY)
 	{
-		return Math.abs(Pigeon.posX-cibleX)+Math.abs(Pigeon.posY-cibleY);
+		return Math.abs(posX-cibleX)+Math.abs(posY-cibleY);
 	}
 	
-	public static void eat(Food food)
+	public void eat(Food food)
 	{
 		if(posX==food.getPosX()&&posY==food.getPosY())
 			if(food.isFresh())
 			{
 				food.isEaten();
-				System.out.println("Nourriture mangée");
+				System.out.println("Nourriture mangée par le pigeon "+numberPigeon);
 			}
 	}
 	
-	public static void afraid()
+	public void afraid()
 	{
 		Random rand= new Random();
 		int intervalOccurence=rand.nextInt(Parc.windowSize);
@@ -117,9 +100,9 @@ public class Pigeon extends Thread {
 		
 		if(randomNumber<intervalOccurence)
 		{
-			posX=rand.nextInt(Parc.windowSize);
-			posY=rand.nextInt(Parc.windowSize);
-			System.out.println("Effrayé");
+			this.posX=rand.nextInt(Parc.windowSize);
+			this.posY=rand.nextInt(Parc.windowSize);
+			System.out.println("Pigeon "+numberPigeon+" est effrayé");
 			try {
 				Thread.sleep(200);
 			} catch (InterruptedException e) {
@@ -128,7 +111,7 @@ public class Pigeon extends Thread {
 			}
 		}
 	}
-	public static void game()
+	public void game()
 
 	{
 		if(Parc.food.size()>0)
