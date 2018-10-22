@@ -72,7 +72,7 @@ public class ThreadAffichage extends Thread {
 
 		while (true) {
 
-			c.paintComponent(c.getGraphics());
+			c.repaint();
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
