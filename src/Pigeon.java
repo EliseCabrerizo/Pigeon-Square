@@ -41,7 +41,7 @@ public class Pigeon extends Thread {
 		if(food.isFresh()&&food.exist())
 		{
 			if(posX < food.getPosX())
-				for(int i=posX;i<food.getPosX()&&food.exist();i++)
+				for(int i=posX;i<food.getPosX()&&food.exist()&&food.isFresh();i++)
 					{
 					posX ++;
 					try {
@@ -52,7 +52,7 @@ public class Pigeon extends Thread {
 					}
 					}
 			else if(posX > food.getPosX())
-				for(int i=posX;i>food.getPosX()&&food.exist();i--)
+				for(int i=posX;i>food.getPosX()&&food.exist()&&food.isFresh();i--)
 					{
 					posX --;
 					try {
@@ -65,7 +65,7 @@ public class Pigeon extends Thread {
 			
 
 			if(posY < food.getPosY())
-				for(int i=posY;i<food.getPosY()&&food.exist();i++)
+				for(int i=posY;i<food.getPosY()&&food.exist()&&food.isFresh();i++)
 					{
 					posY++;
 					try {
@@ -75,7 +75,7 @@ public class Pigeon extends Thread {
 						e.printStackTrace();
 					}}
 			else if(posY > food.getPosY())
-				for(int i=posY;i>food.getPosY()&&food.exist();i--)
+				for(int i=posY;i>food.getPosY()&&food.exist()&&food.isFresh();i--)
 					{
 					posY--;
 					try {
@@ -126,7 +126,7 @@ public class Pigeon extends Thread {
 	{
 		Random rand= new Random();
 		int intervalOccurence=rand.nextInt(Parc.windowSize);
-		int randomNumber = rand.nextInt(Parc.windowSize*20);
+		int randomNumber = rand.nextInt(Parc.windowSize*25);
 		
 		
 		if(randomNumber<intervalOccurence)

@@ -27,7 +27,7 @@ public class Food {
 				isRotten();
 			}
 		};
-		timer.schedule(task, 1400); 
+		timer.schedule(task, 1450); 
 	}
 
 	
