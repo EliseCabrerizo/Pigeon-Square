@@ -5,23 +5,34 @@ public class Pigeon extends Thread {
 	//Position du pigeon dans le parc
 	private int posX=-1;
 	private int posY=-1;
-	
 	//Numero du pigeon
 	private int numberPigeon;
-	
+	private boolean afraid;
+
 	//Getters et Setters
 	public int getPosX() {
 		return posX;
 	}
+
 	public void setPosX(int X) {
 		this.posX = X;
 	}
+
 	public int getPosY() {
 		return posY;
 	}
+
 	public void setPosY(int Y) {
 		this.posY = Y;
 	}
+	public boolean isAfraid() {
+		return afraid;
+	}
+
+	public void setAfraid(boolean afraid) {
+		this.afraid = afraid;
+	}
+
 
 	//Constructor
 	public Pigeon(int i)
@@ -31,8 +42,10 @@ public class Pigeon extends Thread {
 		this.posX=rand.nextInt(Parc.windowSize);
 		this.posY=rand.nextInt(Parc.windowSize);
 		this.numberPigeon=i;
+		afraid=false;
 	}
 
+	
 	//Bouge le pigeon en direction d'une nourriture fraîche
 	public void move(Food food)
 	{
@@ -42,7 +55,7 @@ public class Pigeon extends Thread {
 			//Bouge vers la droite
 			if(posX < food.getPosX())
 				for(int i=posX;i<food.getPosX()&&food.exist()&&food.isFresh();i++)
-					{
+				{
 					posX ++;
 					try {
 						Thread.sleep(4);
@@ -51,10 +64,11 @@ public class Pigeon extends Thread {
 						e.printStackTrace();
 					}
 				}
+
 			//Bouge vers la gauche
 			else if(posX > food.getPosX())
 				for(int i=posX;i>food.getPosX()&&food.exist()&&food.isFresh();i--)
-					{
+				{
 					posX --;
 					try {
 						Thread.sleep(4);
@@ -67,7 +81,7 @@ public class Pigeon extends Thread {
 			//Bouge vers le bas
 			if(posY < food.getPosY())
 				for(int i=posY;i<food.getPosY()&&food.exist()&&food.isFresh();i++)
-					{
+				{
 					posY++;
 					try {
 						Thread.sleep(4);
@@ -75,11 +89,12 @@ public class Pigeon extends Thread {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				}
+			}
+			
 			//Bouge vers le haut
 			else if(posY > food.getPosY())
 				for(int i=posY;i>food.getPosY()&&food.exist()&&food.isFresh();i--)
-					{
+				{
 					posY--;
 					try {
 						Thread.sleep(4);
@@ -89,9 +104,8 @@ public class Pigeon extends Thread {
 					}
 				}
 		}
-		
 	}
-
+	
 	//Trouve la nourriture fraîche la plus proche
 	public Food findFood()
 	{
@@ -105,17 +119,21 @@ public class Pigeon extends Thread {
 					distanceMin=distance(Parc.food.get(i).getPosX(),Parc.food.get(i).getPosY());
 					temp= Parc.food.get(i);
 				}
-				
 		}
 			return temp;
 	}
 
-	//Calcule la distance
+	//Calcule la distance par rapport à la position 
 	public int distance(int cibleX,int cibleY)
 	{
 		return Math.abs(posX-cibleX)+Math.abs(posY-cibleY);
 	}
-	
+	//Calcule la distance entre deux points
+	public int distance2(int departX, int departY,int cibleX,int cibleY)
+	{
+		return Math.abs(departX-cibleX)+Math.abs(departY-cibleY);
+	}
+
 	//Manger la nourriture
 	public void eat(Food food)
 	{
@@ -125,31 +143,103 @@ public class Pigeon extends Thread {
 				if(food.isFresh()&&food.exist())
 					food.isEaten(numberPigeon);
 		}
-		
 	}
-	
+
 	//Perturbation pour les pigeons
 	public void afraid()
 	{
-		//Occurence aléatoire
-		/*Random rand= new Random();
+		//Occurence aléatoire pour lancer la pierre
+		Random rand= new Random();
 		int intervalOccurence=rand.nextInt(Parc.windowSize);
 		int randomNumber = rand.nextInt(Parc.windowSize*25);
-		
-		if(randomNumber<intervalOccurence)
+		int posX=rand.nextInt(Parc.windowSize);
+		int posY=rand.nextInt(Parc.windowSize);
+		if(randomNumber<intervalOccurence) 
 		{
-			//Eloigne le pigeon
-			this.posX=rand.nextInt(Parc.windowSize);
-			this.posY=rand.nextInt(Parc.windowSize);
-			System.out.println("Pigeon "+numberPigeon+" est effrayé");
-			try {
-				Thread.sleep(200);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			Rock r = new Rock(posX,posY);
+			Parc.setRock(r);
+			//Occurence aléatoire pour avoir peur de la pierre
+			intervalOccurence=rand.nextInt(50);
+			randomNumber = rand.nextInt(50);
+			if(randomNumber<intervalOccurence)
+			{	
+				afraid=true;
+				//Eloigne le pigeon
+				int x = posX;
+				int y = posY;
+				while(distance2(x,y,posX,posY)<100)
+				{
+					x=rand.nextInt(Parc.windowSize);
+					y=rand.nextInt(Parc.windowSize);
+				}
+				moveAfraid(x,y);
+				System.out.println("Pigeon "+numberPigeon+" est effrayé");
+				afraid=false;
+				try {
+					Thread.sleep(200);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
-		}*/
+		}
 	}
+
+	//Bouge le pigeon en direction d'une nourriture fraîche
+		public void moveAfraid(int posXF,int posYF)
+		{
+			//Bouge vers la droite
+			if(posX < posXF)
+				for(int i=posX;i<posXF;i++)
+				{
+					posX++;
+					try {
+						Thread.sleep(2);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				//Bouge vers la gauche
+				else if(posX > posXF)
+					for(int i=posX;i>posXF;i--)
+					{
+						posX --;
+						try {
+							Thread.sleep(4);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+			
+				//Bouge vers le bas
+				if(posY < posYF)
+					for(int i=posY;i<posYF;i++)
+					{
+						posY++;
+						try {
+							Thread.sleep(4);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				
+				//Bouge vers le haut
+				else if(posY > posYF)
+					for(int i=posY;i>posYF;i--)
+					{
+						posY--;
+						try {
+							Thread.sleep(4);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+			}
 
 	//Comportement du pigeon
 	public void game()
@@ -162,22 +252,21 @@ public class Pigeon extends Thread {
 		}
 		afraid();
 	}
-
+	
 	//Boucle de simulation du pigeon
 	public void run()
 	{
 		while(true)
 		{
 			game();
-			try 
-			{
+			try	{
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		
 	}
 
+	
 }
