@@ -85,7 +85,7 @@ public class Parc extends JComponent{
 		//Food-----------	
 		
 		//Rock-----------
-		if (rock.exist()){	
+		if (rock != null && rock.exist()){	 
 			Image img;
 			try {
 				img = ImageIO.read(new File("res/rock.png"));
@@ -116,7 +116,6 @@ public class Parc extends JComponent{
 		Pigeon pigeon2=new Pigeon(2);
 		Pigeon pigeon3=new Pigeon(3);
 		Parc.pigeons = new Pigeon[]{pigeon1,pigeon2,pigeon3};
-		Parc.rock = new Rock(0, 0);
 		ThreadAffichage threadAffichage=new ThreadAffichage();
 		
 		//Lancement des threads

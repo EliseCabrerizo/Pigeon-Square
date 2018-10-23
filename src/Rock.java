@@ -11,7 +11,7 @@ public class Rock {
 	private boolean exist;
 	
 	//Constructors
-	public Rock(int X,int Y)
+	public Rock()
 	{
 		Random rand= new Random();
 		
@@ -27,7 +27,7 @@ public class Rock {
 				disappear();
 			}
 		};
-		timer.schedule(task, 1450); 
+		timer.schedule(task, 2000); 
 	}
 
 	
