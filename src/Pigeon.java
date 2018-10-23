@@ -33,11 +33,11 @@ public class Pigeon extends Thread {
 		this.numberPigeon=i;
 	}
 
-	//Bouge le pigeon en direction d'une nourriture fraiche
+	//Bouge le pigeon en direction d'une nourriture fraîche
 	public void move(Food food)
 	{
 		//Si la nourriture est fraiche
-		if(food.isFresh()&&food.exist())
+		if(food.exist() && food.isFresh())
 		{
 			//Bouge vers la droite
 			if(posX < food.getPosX())
@@ -92,7 +92,7 @@ public class Pigeon extends Thread {
 		
 	}
 
-	//Trouve la la nourriture fraiche la plus proche
+	//Trouve la nourriture fraîche la plus proche
 	public Food findFood()
 	{
 		Food temp=new Food();
@@ -116,7 +116,7 @@ public class Pigeon extends Thread {
 		return Math.abs(posX-cibleX)+Math.abs(posY-cibleY);
 	}
 	
-	//Détecte si la nourriture a été mangé
+	//Manger la nourriture
 	public void eat(Food food)
 	{
 		synchronized(this)

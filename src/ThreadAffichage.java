@@ -37,10 +37,10 @@ public class ThreadAffichage extends Thread {
 		mainFrame.setResizable(true);
 		mainFrame.setVisible(true);
 		
-		//Gestion du clique de la sourie
+		//Gestion du clic de la souris
 		mainFrame.addMouseListener(new MouseListener() { 
 
-			//Creation de la nourriture au click de la sourie
+			//Creation de la nourriture au clic de la souris
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				c.createFood(e.getX(), e.getY());
