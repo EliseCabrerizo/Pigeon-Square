@@ -20,6 +20,8 @@ public class Parc extends JComponent{
 
 	//Liste des nourritures present dans le parc
 	public static ArrayList<Food> food;
+	
+	public static Rock rock;
 
 	//Getters et Setters
 	public static Pigeon[] getPigeons() {
@@ -55,7 +57,6 @@ public class Parc extends JComponent{
 				img = ImageIO.read(new File("res/dove.png"));
 				g.drawImage(img,pigeons[i].getPosX()-(img.getWidth(null)/2),pigeons[i].getPosY()-(img.getHeight(null)/2),60,60,null);
 			}catch (IOException e){
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -82,6 +83,21 @@ public class Parc extends JComponent{
 			}
 		}
 		//Food-----------	
+		
+		//Rock-----------
+		if (rock.exist()){	
+			Image img;
+			try {
+				img = ImageIO.read(new File("res/rock.png"));
+				int x= rock.getPosX() - img.getWidth(null)/2;
+				int y= rock.getPosY() - img.getHeight(null)/2;
+				g.drawImage(img,x,y,null);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		//Rock-----------
 	}
 
 	//Creation de la nourriture
@@ -96,12 +112,11 @@ public class Parc extends JComponent{
 	{
 		//Initialisation
 		Parc.food = new ArrayList<>();
-		
 		Pigeon pigeon1=new Pigeon(1);
 		Pigeon pigeon2=new Pigeon(2);
 		Pigeon pigeon3=new Pigeon(3);
 		Parc.pigeons = new Pigeon[]{pigeon1,pigeon2,pigeon3};
-		
+		Parc.rock = new Rock(0, 0);
 		ThreadAffichage threadAffichage=new ThreadAffichage();
 		
 		//Lancement des threads
