@@ -132,7 +132,7 @@ public class Pigeon extends Thread {
 	public void afraid()
 	{
 		//Occurence aléatoire
-		Random rand= new Random();
+		/*Random rand= new Random();
 		int intervalOccurence=rand.nextInt(Parc.windowSize);
 		int randomNumber = rand.nextInt(Parc.windowSize*25);
 		
@@ -148,7 +148,7 @@ public class Pigeon extends Thread {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+		}*/
 	}
 
 	//Comportement du pigeon

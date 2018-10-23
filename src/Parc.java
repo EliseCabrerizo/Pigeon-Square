@@ -36,6 +36,14 @@ public class Parc extends JComponent{
 	public static void setFood(ArrayList<Food> food) {
 		Parc.food = food;
 	}
+	
+	public static Rock getRock() {
+		return rock;
+	}
+	
+	public static void setRock(Rock rock) {
+		Parc.rock = rock;
+	}
 
 	//Gestion de l'affichage des images
 	public void paintComponent(Graphics g) 
@@ -116,6 +124,7 @@ public class Parc extends JComponent{
 		Pigeon pigeon2=new Pigeon(2);
 		Pigeon pigeon3=new Pigeon(3);
 		Parc.pigeons = new Pigeon[]{pigeon1,pigeon2,pigeon3};
+		Parc.rock = new Rock();
 		ThreadAffichage threadAffichage=new ThreadAffichage();
 		
 		//Lancement des threads
