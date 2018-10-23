@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -12,11 +13,13 @@ public class Rock {
 	//Constructors
 	public Rock(int X,int Y)
 	{
-		exist=true;
-		posX=X;
-		posY=Y; 
+		Random rand= new Random();
 		
-		// Permet de faire vieillir la nourriture
+		exist=true;
+		posX=rand.nextInt(Parc.windowSize);
+		posY=rand.nextInt(Parc.windowSize); 
+		
+		// Permet de faire vieillir la pierre
 		Timer timer = new Timer();
 		TimerTask task = new TimerTask() {
 			@Override
