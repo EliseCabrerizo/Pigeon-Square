@@ -151,18 +151,13 @@ public class Pigeon extends Thread {
 		//Occurence aléatoire pour lancer la pierre
 		Random rand= new Random();
 		int intervalOccurence=rand.nextInt(Parc.windowSize);
-		int randomNumber = rand.nextInt(Parc.windowSize*25);
+		int randomNumber = rand.nextInt(Parc.windowSize*40);
 		int posX=rand.nextInt(Parc.windowSize);
 		int posY=rand.nextInt(Parc.windowSize);
 		if(randomNumber<intervalOccurence) 
 		{
 			Rock r = new Rock(posX,posY);
 			Parc.setRock(r);
-			//Occurence aléatoire pour avoir peur de la pierre
-			intervalOccurence=rand.nextInt(50);
-			randomNumber = rand.nextInt(50);
-			if(randomNumber<intervalOccurence)
-			{	
 				afraid=true;
 				//Eloigne le pigeon
 				int x = posX;
@@ -183,7 +178,7 @@ public class Pigeon extends Thread {
 				}
 				
 			}
-		}
+	
 	}
 
 	//Bouge le pigeon en direction d'une nourriture fraîche
